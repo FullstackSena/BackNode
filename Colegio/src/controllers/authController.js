@@ -4,10 +4,10 @@ const bcrypt = require('bcryptjs');
 
 exports.register = async (req, res) => {
     try {
-      const { username, password } = req.body;
+      const { username, email, password } = req.body;
   
       // Validar que todos los campos necesarios estén presentes
-      if (!username || !password) {
+      if (!username || !password || !email) {
         return res.status(400).json({ message: 'Todos los campos son requeridos' });
       }
   
@@ -20,6 +20,7 @@ exports.register = async (req, res) => {
       // Crear nuevo usuario
       const user = new User({
         username,
+        email,
         password
       });
   
